@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-Stack Python Engineer | AI Agent Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link  rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">Sabin Gautam</div>
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tech">Tech Stack</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMobileNav()">&#9776;</button>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#hero" onclick="toggleMobileNav()">Home</a>
+    <a href="#about" onclick="toggleMobileNav()">About</a>
+    <a href="#tech" onclick="toggleMobileNav()">Tech Stack</a>
+    <a href="#projects" onclick="toggleMobileNav()">Projects</a>
+    <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero" class="section hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="subtitle typing-cursor" id="typing-text">Full-Stack Python Engineer</div>
+        <h1>Building Intelligent Systems with Code</h1>
+        <p>Specialized in Python, Django, and AI-driven architectures. I design scalable backends, craft seamless APIs, and orchestrate intelligent agent workflows that power next-generation applications.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+        <div class="code-snippet">
+          <span class="code-keyword">class</span> <span class="code-func">Engineer</span>:<br>
+          &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-func">__init__</span>(<span class="code-keyword">self</span>):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.stack = [<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>, <span class="code-string">"AI"</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.passion = <span class="code-string">"Building the future"</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="avatar-container">
+          <!-- Holographic interfaces -->
+          <div class="holo-card holo-1">
+            <div class="holo-title">System Status</div>
+            <div class="holo-value">ONLINE</div>
+            <div class="holo-bar"><div class="holo-bar-fill"></div></div>
+          </div>
+          <div class="holo-card holo-2">
+            <div class="holo-title">Web Application</div>
+            <div class="holo-value">Active</div>
+            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:0.5s"></div></div>
+          </div>
+          <div class="holo-card holo-3">
+            <div class="holo-title">Docker</div>
+            <div class="holo-value">12 Containers</div>
+            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1s"></div></div>
+          </div>
+          <div class="holo-card holo-4">
+            <div class="holo-title">PostgreSQL</div>
+            <div class="holo-value">Connected</div>
+            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1.5s"></div></div>
+          </div>
+          <div class="holo-card holo-5">
+            <div class="holo-title">AWS</div>
+            <div class="holo-value">Running</div>
+            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:2s"></div></div>
+          </div>
+
+          <!-- Avatar -->
+          <div class="avatar-body"></div>
+            <img src="image.png" alt="dp" style="height:360px; width:360px; margin-left:-3rem; margin-top:7rem;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2 class="section-title fade-in">About Me</h2>
+    <p class="section-subtitle fade-in">A passionate engineer who bridges the gap between robust backend systems and cutting-edge AI.</p>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm a <strong>full-stack software engineer</strong> with deep expertise in Python and Django ecosystems. Over the years, I've architected scalable web applications, designed RESTful APIs, and implemented complex data pipelines serving millions of requests.</p>
+        <p>Recently, I've been diving deep into <strong>AI agent architectures</strong> — building autonomous systems with LangGraph, orchestrating multi-agent workflows, and integrating LLMs into production-grade applications.</p>
+        <p>When I'm not coding, you'll find me exploring distributed systems, optimizing database queries, or experimenting with the latest in generative AI.</p>
+      </div>
+      <div class="about-stats fade-in">
+        <div class="stat-card">
+          <div class="stat-number" data-target="8">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="50">0</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="12">0</div>
+          <div class="stat-label">AI Agents Built</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="99">0</div>
+          <div class="stat-label">% Uptime Achieved</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section id="tech" class="section">
+    <h2 class="section-title fade-in">Tech Stack</h2>
+    <p class="section-subtitle fade-in">The tools and technologies I use to build scalable, intelligent systems.</p>
+    <div class="tech-grid fade-in">
+      <div class="tech-card">
+        <div class="tech-icon">Py</div>
+        <div class="tech-name">Python</div>
+        <div class="tech-desc">Core Language</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">Dj</div>
+        <div class="tech-name">Django</div>
+        <div class="tech-desc">Web Framework</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">Pg</div>
+        <div class="tech-name">PostgreSQL</div>
+        <div class="tech-desc">Database</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">Dr</div>
+        <div class="tech-name">Docker</div>
+        <div class="tech-desc">Containerization</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">AWS</div>
+        <div class="tech-name">AWS</div>
+        <div class="tech-desc">Cloud Platform</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">Rd</div>
+        <div class="tech-name">Redis</div>
+        <div class="tech-desc">Cache & Queue</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">Gh</div>
+        <div class="tech-name">GitHub</div>
+        <div class="tech-desc">Version Control</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">API</div>
+        <div class="tech-name">REST APIs</div>
+        <div class="tech-desc">Architecture</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <h2 class="section-title fade-in">Featured Projects</h2>
+    <p class="section-subtitle fade-in">A selection of recent work spanning web applications, scheduling systems, and cloud infrastructure.</p>
+    <div class="projects-grid fade-in">
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-tag ai">AI Agent</span>
+        </div>
+        <div class="project-body">
+          <h3>Full Stack Web Developer</h3>
+          <p>Experienced in developing scalable web applications using Django, Django REST Framework, PostgreSQL, and modern frontend technologies. Skilled in designing RESTful APIs, implementing authentication, integrating third-party services, and deploying applications with Docker and AWS while ensuring performance, security, and maintainability.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Django</span>
+            <span>Django REST Framework</span>
+            <span>PostgreSQL</span>
+            <span>JavaScript</span>
+            <span>Bootstrap</span>
+            <span>Docker</span>
+            <span>AWS</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 234</span>
+            <span>&#127860; 45</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-tag web">SaaS</span>
+        </div>
+        <div class="project-body">
+          <h3>Enterprise Analytics Platform</h3>
+          <p>Real-time analytics dashboard processing 10M+ events daily. Features custom Django ORM optimizations, Redis caching layers, and PostgreSQL partitioning for sub-second query performance.</p>
+          <div class="project-tech">
+            <span>Django</span><span>PostgreSQL</span><span>Redis</span><span>Celery</span><span>AWS</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 189</span>
+            <span>&#127860; 32</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-tag api">API</span>
+        </div>
+        <div class="project-body">
+          <h3>Microservices Gateway</h3>
+          <p>API gateway orchestrating 15+ microservices with JWT authentication, rate limiting, and circuit breaker patterns. Built with Django REST Framework and deployed on AWS ECS with auto-scaling.</p>
+          <div class="project-tech">
+            <span>DRF</span><span>Docker</span><span>AWS ECS</span><span>Nginx</span><span>CI/CD</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 312</span>
+            <span>&#127860; 67</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2 class="section-title fade-in">Get In Touch</h2>
+    <p class="section-subtitle fade-in">Have a project in mind or want to collaborate? Let's build something amazing together.</p>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <h3>Let's Talk</h3>
+        <p>I'm currently open to new opportunities, freelance projects, and collaborations. Whether you need a scalable backend, an AI-powered solution, or a full-stack application — I'm here to help.</p>
+
+        <a href="mailto:sabingautam@gmail.com" class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div class="contact-details">
+            <h4>Email</h4>
+            <span>sabingautam05@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://github.com/sabing123" target="_blank" class="contact-item">
+          <div class="contact-icon">&#60;&#47;&#62;</div>
+          <div class="contact-details">
+            <h4>GitHub</h4>
+            <span>https://github.com/sabing123</span>
+          </div>
+        </a>
+        <a href="www.linkedin.com/in/pyrite-demonic" target="_blank" class="contact-item">
+          <div class="contact-icon">&#128279;</div>
+          <div class="contact-details">
+            <h4>LinkedIn</h4>
+            <span>https://linkedin.com/in/pyrite-demonic</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Project Collaboration">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="alert('Message sent! (Demo)')">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#tech">Tech Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>Built with Python, Django & AI. Designed for the future.</p>
+  </footer>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
