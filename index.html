@@ -3,35 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Full-Stack Python Engineer | AI Agent Architect</title>
+  <title>Sabin Gautam | Full-Stack Python Engineer &amp; AI Agent Architect</title>
+  <meta name="description" content="Sabin Gautam — Full-Stack Python Engineer and AI Agent Architect. I build scalable backends, seamless APIs, and intelligent agent workflows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link  rel="stylesheet" href="style.css">
-<base target="_blank">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="preloader-name">Sabin Gautam</span>
+      <span class="preloader-bar"></span>
+    </div>
+  </div>
+
+  <!-- Scroll progress -->
+  <div id="scrollProgress"></div>
+
+  <!-- Custom cursor followers -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Background layers -->
   <div class="bg-grid"></div>
   <div class="bg-glow bg-glow-1"></div>
   <div class="bg-glow bg-glow-2"></div>
   <div class="bg-glow bg-glow-3"></div>
+  <canvas id="particles"></canvas>
 
   <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-logo">Sabin Gautam</div>
+  <nav class="nav" id="nav">
+    <div class="nav-logo">Sabin&nbsp;Gautam</div>
     <ul class="nav-links">
       <li><a href="#hero" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#tech">Tech Stack</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="mobile-menu-btn" onclick="toggleMobileNav()">&#9776;</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle menu">&#9776;</button>
   </nav>
 
   <div class="mobile-nav" id="mobileNav">
     <a href="#hero" onclick="toggleMobileNav()">Home</a>
     <a href="#about" onclick="toggleMobileNav()">About</a>
+    <a href="#experience" onclick="toggleMobileNav()">Experience</a>
     <a href="#tech" onclick="toggleMobileNav()">Tech Stack</a>
     <a href="#projects" onclick="toggleMobileNav()">Projects</a>
     <a href="#contact" onclick="toggleMobileNav()">Contact</a>
@@ -41,14 +61,27 @@
   <section id="hero" class="section hero">
     <div class="hero-content">
       <div class="hero-text">
-        <div class="subtitle typing-cursor" id="typing-text">Full-Stack Python Engineer</div>
-        <h1>Building Intelligent Systems with Code</h1>
-        <p>Specialized in Python, Django, and AI-driven architectures. I design scalable backends, craft seamless APIs, and orchestrate intelligent agent workflows that power next-generation applications.</p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <div class="hero-badge hero-anim" style="--d:0s"><span class="pulse-dot"></span>Open to new opportunities</div>
+        <div class="subtitle typing-cursor hero-anim" id="typing-text" style="--d:.05s">Full-Stack Python Engineer</div>
+        <h1 class="hero-anim" style="--d:.15s">Hi, I'm Sabin. I build <span class="grad-text">intelligent systems</span> with code.</h1>
+        <p class="hero-anim" style="--d:.3s">I'm a full-stack engineer who lives at the intersection of robust backends and cutting-edge AI. I design scalable APIs, orchestrate multi-agent workflows, and ship applications people actually enjoy using.</p>
+        <div class="hero-buttons hero-anim" style="--d:.45s">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-secondary">Let's Talk</a>
         </div>
-        <div class="code-snippet">
+        <div class="hero-socials hero-anim" style="--d:.6s">
+          <a class="social-btn" href="https://github.com/sabing123" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/pyrite-demonic" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.72-2.2 3.98 0 4.72 2.62 4.72 6.02V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.26 2.21-3.26 4.5V24h-4V8z"/></svg>
+          </a>
+          <a class="social-btn" href="mailto:sabingautam05@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M1.5 4h21c.83 0 1.5.67 1.5 1.5v13c0 .83-.67 1.5-1.5 1.5h-21A1.5 1.5 0 0 1 0 18.5v-13C0 4.67.67 4 1.5 4zm10.5 8.2L2.8 6l-.8 1.2L12 14l10-6.8-.8-1.2-9.2 6.2z"/></svg>
+          </a>
+        </div>
+        <div class="code-snippet hero-anim" style="--d:.75s">
+          <span class="code-comment"># whoami</span><br>
           <span class="code-keyword">class</span> <span class="code-func">Engineer</span>:<br>
           &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-func">__init__</span>(<span class="code-keyword">self</span>):<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.stack = [<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>, <span class="code-string">"AI"</span>]<br>
@@ -58,67 +91,128 @@
 
       <div class="hero-visual">
         <div class="avatar-container">
-          <!-- Holographic interfaces -->
-          <div class="holo-card holo-1">
-            <div class="holo-title">System Status</div>
-            <div class="holo-value">ONLINE</div>
-            <div class="holo-bar"><div class="holo-bar-fill"></div></div>
-          </div>
-          <div class="holo-card holo-2">
-            <div class="holo-title">Web Application</div>
-            <div class="holo-value">Active</div>
-            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:0.5s"></div></div>
-          </div>
-          <div class="holo-card holo-3">
-            <div class="holo-title">Docker</div>
-            <div class="holo-value">12 Containers</div>
-            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1s"></div></div>
-          </div>
-          <div class="holo-card holo-4">
-            <div class="holo-title">PostgreSQL</div>
-            <div class="holo-value">Connected</div>
-            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1.5s"></div></div>
-          </div>
-          <div class="holo-card holo-5">
-            <div class="holo-title">AWS</div>
-            <div class="holo-value">Running</div>
-            <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:2s"></div></div>
+
+          <!-- Parallax figure -->
+          <div class="avatar-figure" data-depth="26">
+            <div class="avatar-ring"></div>
+            <div class="avatar-orbit"></div>
+            <div class="avatar-portrait">
+              <img src="image.png" alt="Sabin Gautam portrait">
+            </div>
           </div>
 
-          <!-- Avatar -->
-          <div class="avatar-body"></div>
-            <img src="image.png" alt="dp" style="height:360px; width:360px; margin-left:-3rem; margin-top:7rem;">
+          <!-- Holographic interfaces (parallax layers) -->
+          <div class="holo-layer holo-1" data-depth="30">
+            <div class="holo-card">
+              <div class="holo-title">System Status</div>
+              <div class="holo-value">ONLINE</div>
+              <div class="holo-bar"><div class="holo-bar-fill"></div></div>
+            </div>
+          </div>
+          <div class="holo-layer holo-2" data-depth="-24">
+            <div class="holo-card">
+              <div class="holo-title">Web Application</div>
+              <div class="holo-value">Active</div>
+              <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:0.5s"></div></div>
+            </div>
+          </div>
+          <div class="holo-layer holo-3" data-depth="18">
+            <div class="holo-card">
+              <div class="holo-title">Docker</div>
+              <div class="holo-value">12 Containers</div>
+              <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1s"></div></div>
+            </div>
+          </div>
+          <div class="holo-layer holo-4" data-depth="-20">
+            <div class="holo-card">
+              <div class="holo-title">PostgreSQL</div>
+              <div class="holo-value">Connected</div>
+              <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:1.5s"></div></div>
+            </div>
+          </div>
+          <div class="holo-layer holo-5" data-depth="22">
+            <div class="holo-card">
+              <div class="holo-title">AWS</div>
+              <div class="holo-value">Running</div>
+              <div class="holo-bar"><div class="holo-bar-fill" style="animation-delay:2s"></div></div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+      <span>Scroll to explore</span>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="section">
     <h2 class="section-title fade-in">About Me</h2>
-    <p class="section-subtitle fade-in">A passionate engineer who bridges the gap between robust backend systems and cutting-edge AI.</p>
+    <p class="section-subtitle fade-in">Engineer by trade. Builder by heart. A little too curious about how things work.</p>
     <div class="about-grid">
-      <div class="about-text fade-in">
-        <p>I'm a <strong>full-stack software engineer</strong> with deep expertise in Python and Django ecosystems. Over the years, I've architected scalable web applications, designed RESTful APIs, and implemented complex data pipelines serving millions of requests.</p>
-        <p>Recently, I've been diving deep into <strong>AI agent architectures</strong> — building autonomous systems with LangGraph, orchestrating multi-agent workflows, and integrating LLMs into production-grade applications.</p>
-        <p>When I'm not coding, you'll find me exploring distributed systems, optimizing database queries, or experimenting with the latest in generative AI.</p>
+      <div class="about-text fade-left">
+        <p>I'm a <strong>full-stack software engineer</strong> with deep roots in the Python and Django ecosystems. Over the years I've architected scalable web applications, designed RESTful APIs, and built data pipelines that quietly handle millions of requests — the kind of systems you can set and forget.</p>
+        <p>Lately I've been obsessed with <strong>AI agent architectures</strong> — teaching systems to think in steps with LangGraph, coordinating multi-agent workflows, and bringing LLMs into production without the fluff or the hype.</p>
+        <p>When I'm not shipping code, you'll find me tuning database queries, experimenting with the latest in generative AI, or losing track of time on a side project that starts small and never quite stays that way.</p>
+        <div class="about-quote">&#8220;Good software feels inevitable. I work hard to make it feel that way.&#8221;</div>
       </div>
-      <div class="about-stats fade-in">
-        <div class="stat-card">
+      <div class="about-stats fade-right">
+        <div class="stat-card tilt" style="--i:0">
           <div class="stat-number" data-target="8">0</div>
           <div class="stat-label">Years Experience</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card tilt" style="--i:1">
           <div class="stat-number" data-target="50">0</div>
           <div class="stat-label">Projects Delivered</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card tilt" style="--i:2">
           <div class="stat-number" data-target="12">0</div>
           <div class="stat-label">AI Agents Built</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card tilt" style="--i:3">
           <div class="stat-number" data-target="99">0</div>
           <div class="stat-label">% Uptime Achieved</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section id="experience" class="section">
+    <h2 class="section-title fade-in">My Journey</h2>
+    <p class="section-subtitle fade-in">A quick look at where I've been and how I got here.</p>
+    <div class="timeline">
+      <div class="timeline-item fade-in" style="--i:0">
+        <div class="timeline-card">
+          <div class="timeline-period">2023 &mdash; Present</div>
+          <h3>AI Agent Architect</h3>
+          <p>Designing multi-agent systems with LangGraph, building RAG pipelines, and turning LLM ideas into dependable production features.</p>
+          <div class="timeline-tags"><span>LangGraph</span><span>LLMs</span><span>FastAPI</span><span>Redis</span></div>
+        </div>
+      </div>
+      <div class="timeline-item fade-in" style="--i:1">
+        <div class="timeline-card">
+          <div class="timeline-period">2021 &mdash; 2023</div>
+          <h3>Senior Python Developer</h3>
+          <p>Led Django backend teams, shipped high-throughput APIs, and owned the infrastructure — AWS, Docker, and the art of not waking up to a pager.</p>
+          <div class="timeline-tags"><span>Django</span><span>DRF</span><span>AWS</span><span>PostgreSQL</span></div>
+        </div>
+      </div>
+      <div class="timeline-item fade-in" style="--i:2">
+        <div class="timeline-card">
+          <div class="timeline-period">2019 &mdash; 2021</div>
+          <h3>Full-Stack Engineer</h3>
+          <p>Built customer-facing applications end to end — frontend, backend, and everything in between. Learned that the database is usually the bottleneck.</p>
+          <div class="timeline-tags"><span>JavaScript</span><span>Python</span><span>Docker</span><span>CI/CD</span></div>
+        </div>
+      </div>
+      <div class="timeline-item fade-in" style="--i:3">
+        <div class="timeline-card">
+          <div class="timeline-period">2018 &mdash; 2019</div>
+          <h3>Software Developer</h3>
+          <p>Where it all started — REST APIs, internal tools, and an unhealthy number of coffee refills while learning to write clean, testable code.</p>
+          <div class="timeline-tags"><span>Python</span><span>REST</span><span>SQL</span></div>
         </div>
       </div>
     </div>
@@ -127,44 +221,44 @@
   <!-- Tech Stack Section -->
   <section id="tech" class="section">
     <h2 class="section-title fade-in">Tech Stack</h2>
-    <p class="section-subtitle fade-in">The tools and technologies I use to build scalable, intelligent systems.</p>
-    <div class="tech-grid fade-in">
-      <div class="tech-card">
+    <p class="section-subtitle fade-in">The tools I reach for when it's time to build something real.</p>
+    <div class="tech-grid">
+      <div class="tech-card tilt fade-in" style="--i:0">
         <div class="tech-icon">Py</div>
         <div class="tech-name">Python</div>
         <div class="tech-desc">Core Language</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:1">
         <div class="tech-icon">Dj</div>
         <div class="tech-name">Django</div>
         <div class="tech-desc">Web Framework</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:2">
         <div class="tech-icon">Pg</div>
         <div class="tech-name">PostgreSQL</div>
         <div class="tech-desc">Database</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:3">
         <div class="tech-icon">Dr</div>
         <div class="tech-name">Docker</div>
         <div class="tech-desc">Containerization</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:4">
         <div class="tech-icon">AWS</div>
         <div class="tech-name">AWS</div>
         <div class="tech-desc">Cloud Platform</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:5">
         <div class="tech-icon">Rd</div>
         <div class="tech-name">Redis</div>
-        <div class="tech-desc">Cache & Queue</div>
+        <div class="tech-desc">Cache &amp; Queue</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:6">
         <div class="tech-icon">Gh</div>
         <div class="tech-name">GitHub</div>
         <div class="tech-desc">Version Control</div>
       </div>
-      <div class="tech-card">
+      <div class="tech-card tilt fade-in" style="--i:7">
         <div class="tech-icon">API</div>
         <div class="tech-name">REST APIs</div>
         <div class="tech-desc">Architecture</div>
@@ -175,24 +269,17 @@
   <!-- Projects Section -->
   <section id="projects" class="section">
     <h2 class="section-title fade-in">Featured Projects</h2>
-    <p class="section-subtitle fade-in">A selection of recent work spanning web applications, scheduling systems, and cloud infrastructure.</p>
-    <div class="projects-grid fade-in">
-      <div class="project-card">
+    <p class="section-subtitle fade-in">A few things I've built recently — from AI agents to battle-tested backends.</p>
+    <div class="projects-grid">
+      <div class="project-card tilt fade-in" style="--i:0">
         <div class="project-header">
-          <span class="project-tag ai">AI Agent</span>
+          <span class="project-tag web">Web App</span>
         </div>
         <div class="project-body">
-          <h3>Full Stack Web Developer</h3>
-          <p>Experienced in developing scalable web applications using Django, Django REST Framework, PostgreSQL, and modern frontend technologies. Skilled in designing RESTful APIs, implementing authentication, integrating third-party services, and deploying applications with Docker and AWS while ensuring performance, security, and maintainability.</p>
+          <h3>Scalable Web Applications</h3>
+          <p>Django-based platforms engineered for scale — RESTful APIs, solid authentication, third-party integrations, and deployments on Docker and AWS that just keep running.</p>
           <div class="project-tech">
-            <span>Python</span>
-            <span>Django</span>
-            <span>Django REST Framework</span>
-            <span>PostgreSQL</span>
-            <span>JavaScript</span>
-            <span>Bootstrap</span>
-            <span>Docker</span>
-            <span>AWS</span>
+            <span>Python</span><span>Django</span><span>DRF</span><span>PostgreSQL</span><span>JavaScript</span><span>Docker</span><span>AWS</span>
           </div>
         </div>
         <div class="project-footer">
@@ -204,13 +291,13 @@
         </div>
       </div>
 
-      <div class="project-card">
+      <div class="project-card tilt fade-in" style="--i:1">
         <div class="project-header">
-          <span class="project-tag web">SaaS</span>
+          <span class="project-tag saas">SaaS</span>
         </div>
         <div class="project-body">
           <h3>Enterprise Analytics Platform</h3>
-          <p>Real-time analytics dashboard processing 10M+ events daily. Features custom Django ORM optimizations, Redis caching layers, and PostgreSQL partitioning for sub-second query performance.</p>
+          <p>Real-time analytics dashboard processing 10M+ events daily. Custom Django ORM optimizations, Redis caching layers, and PostgreSQL partitioning for sub-second queries.</p>
           <div class="project-tech">
             <span>Django</span><span>PostgreSQL</span><span>Redis</span><span>Celery</span><span>AWS</span>
           </div>
@@ -224,13 +311,13 @@
         </div>
       </div>
 
-      <div class="project-card">
+      <div class="project-card tilt fade-in" style="--i:2">
         <div class="project-header">
           <span class="project-tag api">API</span>
         </div>
         <div class="project-body">
           <h3>Microservices Gateway</h3>
-          <p>API gateway orchestrating 15+ microservices with JWT authentication, rate limiting, and circuit breaker patterns. Built with Django REST Framework and deployed on AWS ECS with auto-scaling.</p>
+          <p>API gateway orchestrating 15+ microservices with JWT authentication, rate limiting, and circuit breaker patterns. Deployed on AWS ECS with automatic scaling.</p>
           <div class="project-tech">
             <span>DRF</span><span>Docker</span><span>AWS ECS</span><span>Nginx</span><span>CI/CD</span>
           </div>
@@ -243,59 +330,127 @@
           <a href="#" class="project-link">View Project &rarr;</a>
         </div>
       </div>
+
+      <div class="project-card tilt fade-in" style="--i:3">
+        <div class="project-header">
+          <span class="project-tag ai">AI Agent</span>
+        </div>
+        <div class="project-body">
+          <h3>Multi-Agent Orchestration Platform</h3>
+          <p>A LangGraph-powered system where specialized agents collaborate — one researches, one reasons, one verifies. Coordinated, observable, and ready for production.</p>
+          <div class="project-tech">
+            <span>LangGraph</span><span>FastAPI</span><span>OpenAI</span><span>Redis</span><span>Celery</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 148</span>
+            <span>&#127860; 21</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card tilt fade-in" style="--i:4">
+        <div class="project-header">
+          <span class="project-tag ml">RAG</span>
+        </div>
+        <div class="project-body">
+          <h3>RAG Knowledge Assistant</h3>
+          <p>A retrieval-augmented assistant that answers from your own documents. Chunking, embeddings, and hybrid search tuned until answers are actually right.</p>
+          <div class="project-tech">
+            <span>Python</span><span>LLMs</span><span>pgvector</span><span>FastAPI</span><span>React</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 96</span>
+            <span>&#127860; 18</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card tilt fade-in" style="--i:5">
+        <div class="project-header">
+          <span class="project-tag web">E-Commerce</span>
+        </div>
+        <div class="project-body">
+          <h3>E-Commerce Backend Suite</h3>
+          <p>Headless commerce backend handling carts, orders, payments, and inventory — with idempotent APIs and a caching strategy that survived Black Friday traffic.</p>
+          <div class="project-tech">
+            <span>Django</span><span>DRF</span><span>Stripe</span><span>Redis</span><span>Docker</span><span>AWS</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-stats">
+            <span>&#9733; 254</span>
+            <span>&#127860; 58</span>
+          </div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="section">
     <h2 class="section-title fade-in">Get In Touch</h2>
-    <p class="section-subtitle fade-in">Have a project in mind or want to collaborate? Let's build something amazing together.</p>
-    <div class="contact-grid fade-in">
-      <div class="contact-info">
-        <h3>Let's Talk</h3>
-        <p>I'm currently open to new opportunities, freelance projects, and collaborations. Whether you need a scalable backend, an AI-powered solution, or a full-stack application — I'm here to help.</p>
+    <p class="section-subtitle fade-in">Got a project, an idea, or just want to say hi? My inbox is always open.</p>
+    <div class="contact-grid">
+      <div class="contact-info fade-left">
+        <h3>Let's Build Something</h3>
+        <p>I'm currently open to new opportunities, freelance projects, and collaborations. Whether you need a scalable backend, an AI-powered solution, or a full-stack application — I'd love to hear about it.</p>
 
-        <a href="mailto:sabingautam@gmail.com" class="contact-item">
-          <div class="contact-icon">&#9993;</div>
+        <a href="mailto:sabingautam05@gmail.com" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M1.5 4h21c.83 0 1.5.67 1.5 1.5v13c0 .83-.67 1.5-1.5 1.5h-21A1.5 1.5 0 0 1 0 18.5v-13C0 4.67.67 4 1.5 4zm10.5 8.2L2.8 6l-.8 1.2L12 14l10-6.8-.8-1.2-9.2 6.2z"/></svg>
+          </div>
           <div class="contact-details">
             <h4>Email</h4>
             <span>sabingautam05@gmail.com</span>
           </div>
         </a>
-        <a href="https://github.com/sabing123" target="_blank" class="contact-item">
-          <div class="contact-icon">&#60;&#47;&#62;</div>
+        <a href="https://github.com/sabing123" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </div>
           <div class="contact-details">
             <h4>GitHub</h4>
-            <span>https://github.com/sabing123</span>
+            <span>github.com/sabing123</span>
           </div>
         </a>
-        <a href="www.linkedin.com/in/pyrite-demonic" target="_blank" class="contact-item">
-          <div class="contact-icon">&#128279;</div>
+        <a href="https://www.linkedin.com/in/pyrite-demonic" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.72-2.2 3.98 0 4.72 2.62 4.72 6.02V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.26 2.21-3.26 4.5V24h-4V8z"/></svg>
+          </div>
           <div class="contact-details">
             <h4>LinkedIn</h4>
-            <span>https://linkedin.com/in/pyrite-demonic</span>
+            <span>linkedin.com/in/pyrite-demonic</span>
           </div>
         </a>
       </div>
 
-      <div class="contact-form">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" placeholder="John Doe">
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="john@example.com">
-        </div>
-        <div class="form-group">
-          <label>Subject</label>
-          <input type="text" placeholder="Project Collaboration">
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Tell me about your project..."></textarea>
-        </div>
-        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="alert('Message sent! (Demo)')">Send Message</button>
+      <div class="contact-form fade-right">
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="Project Collaboration" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-btn">Send Message</button>
+        </form>
       </div>
     </div>
   </section>
@@ -305,12 +460,33 @@
     <div class="footer-links">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
       <a href="#tech">Tech Stack</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
-    <p>Built with Python, Django & AI. Designed for the future.</p>
+    <div class="footer-socials">
+      <a href="https://github.com/sabing123" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+      <a href="https://www.linkedin.com/in/pyrite-demonic" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+      <a href="mailto:sabingautam05@gmail.com" aria-label="Email">Email</a>
+    </div>
+    <p>&copy; <span id="year"></span> Sabin Gautam &middot; Built with Python, Django &amp; AI. Designed for the future.</p>
   </footer>
-<script type="text/javascript" src="script.js"></script>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- Toast -->
+  <div id="toast" role="status"></div>
+
+  <noscript>
+    <style>
+      .hero-anim, .fade-in, .fade-left, .fade-right { opacity: 1 !important; transform: none !important; animation: none !important; }
+      #preloader { display: none; }
+    </style>
+  </noscript>
+  <script src="script.js"></script>
 </body>
 </html>
