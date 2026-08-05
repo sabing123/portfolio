@@ -153,7 +153,7 @@
     const canvas = document.getElementById('particles');
     if (!canvas || prefersReducedMotion) return;
     const ctx = canvas.getContext('2d');
-    const colors = ['0,212,255', '0,102,255', '124,58,237'];
+    const colors = ['99, 102, 241', '139, 92, 246', '16, 185, 129', '245, 158, 11'];
     const LINK_DIST = 130;
     let width = 0;
     let height = 0;
@@ -374,6 +374,23 @@
 
     fields.forEach(field => {
       field.addEventListener('input', () => field.classList.remove('error'));
+    });
+  }
+
+  /* ================= Theme Toggle ================= */
+  const themeToggle = document.getElementById('themeToggle');
+  const htmlEl = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    htmlEl.classList.add('light-mode');
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('light-mode');
+      const isLight = htmlEl.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
   }
 })();
