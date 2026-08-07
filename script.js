@@ -460,7 +460,7 @@
     let mouseY = 0;
 
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('image.png', texture => {
+    textureLoader.load('/image.png', texture => {
       const staticImg = document.querySelector('.avatar-portrait img');
       if (staticImg) staticImg.style.opacity = '0';
 
@@ -540,5 +540,9 @@
       renderer.setSize(w, h);
     });
   }
-  initThreeJS();
+  if (document.readyState === 'complete') {
+    initThreeJS();
+  } else {
+    window.addEventListener('load', initThreeJS);
+  }
 })();
