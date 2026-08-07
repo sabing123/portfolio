@@ -1283,7 +1283,7 @@
       transform: translateX(-50%) translateY(20px);
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid var(--neon-cyan);
-      color: var(--text-primary);
+      color: #f3f4f6;
       padding: 14px 24px;
       border-radius: 10px;
       font-size: 14px;
@@ -1294,6 +1294,12 @@
       z-index: 9500;
       max-width: 90vw;
       text-align: center;
+    }
+    html.light-mode #toast {
+      background: rgba(255, 255, 255, 0.98);
+      color: #1f2937;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
     #toast.show {
       opacity: 1;

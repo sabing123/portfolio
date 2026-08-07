@@ -365,12 +365,40 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      setTimeout(() => {
+      // Send form data directly to sabingautam05@gmail.com via Web3Forms API
+      // Get your free access key instantly at https://web3forms.com/
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: '47fdd710-5043-488b-aac5-cf75e430c148', // Replace with your free access key from web3forms.com
+          subject: `Inquiry: ${fields[2].value.trim()} (${fields[0].value.trim()})`,
+          from_name: 'Sabin Gautam Portfolio',
+          replyto: fields[1].value.trim(),
+          name: fields[0].value.trim(),
+          email: fields[1].value.trim(),
+          message: fields[3].value.trim()
+        })
+      })
+      .then(async response => {
+        const json = await response.json();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';
-        form.reset();
-        showToast('Message sent! I will get back to you soon.', 'success');
-      }, 900);
+        if (response.status === 200) {
+          form.reset();
+          showToast('Message sent successfully! Check your inbox.', 'success');
+        } else {
+          showToast(json.message || 'Something went wrong. Please try again.', 'error');
+        }
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        showToast('Network error. Please email me directly at sabingautam05@gmail.com', 'error');
+      });
     });
 
     fields.forEach(field => {
