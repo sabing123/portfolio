@@ -393,4 +393,76 @@
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
   }
+
+  /* ================= Three.js 3D Hero Animation ================= */
+  function initThreeJS() {
+    const container = document.getElementById('three-container');
+    if (!container || typeof THREE === 'undefined' || prefersReducedMotion) return;
+
+    const width = container.clientWidth || 380;
+    const height = container.clientHeight || 380;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+    camera.position.z = 4.2;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const geometry = new THREE.TorusKnotGeometry(1.1, 0.35, 128, 32);
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x00d4ff,
+      wireframe: true,
+      roughness: 0.2,
+      metalness: 0.8
+    });
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    scene.add(ambientLight);
+
+    const pointLight1 = new THREE.PointLight(0x8b5cf6, 3, 50);
+    pointLight1.position.set(5, 5, 5);
+    scene.add(pointLight1);
+
+    const pointLight2 = new THREE.PointLight(0x00d4ff, 3, 50);
+    pointLight2.position.set(-5, -5, 5);
+    scene.add(pointLight2);
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener('mousemove', e => {
+      mouseX = (e.clientX / window.innerWidth) - 0.5;
+      mouseY = (e.clientY / window.innerHeight) - 0.5;
+    }, { passive: true });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      torusKnot.rotation.x = time * 0.25 + mouseY * 0.8;
+      torusKnot.rotation.y = time * 0.3 + mouseX * 0.8;
+
+      const scale = 1 + Math.sin(time * 1.5) * 0.05;
+      torusKnot.scale.set(scale, scale, scale);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      const w = container.clientWidth || 380;
+      const h = container.clientHeight || 380;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  }
+  initThreeJS();
 })();
