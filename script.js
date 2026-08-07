@@ -107,15 +107,16 @@
     });
   }
 
-  /* ================= Fade-in on scroll ================= */
+  /* ================= Fade-in on scroll (Re-triggers on scroll down) ================= */
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove('visible');
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(el => {
     revealObserver.observe(el);
@@ -394,7 +395,7 @@
     });
   }
 
-  /* ================= Three.js 3D Hero Animation ================= */
+  /* ================= Three.js 3D Portrait & Hero Animation ================= */
   function initThreeJS() {
     const container = document.getElementById('three-container');
     if (!container || typeof THREE === 'undefined' || prefersReducedMotion) return;
@@ -404,24 +405,14 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    camera.position.z = 4.2;
+    camera.position.z = 3.8;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const geometry = new THREE.TorusKnotGeometry(1.1, 0.35, 128, 32);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x00d4ff,
-      wireframe: true,
-      roughness: 0.2,
-      metalness: 0.8
-    });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
     const pointLight1 = new THREE.PointLight(0x8b5cf6, 3, 50);
@@ -432,13 +423,61 @@
     pointLight2.position.set(-5, -5, 5);
     scene.add(pointLight2);
 
+    let portraitMesh = null;
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    let targetRotationX = 0;
+    let targetRotationY = 0;
     let mouseX = 0;
     let mouseY = 0;
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('image.png', texture => {
+      const staticImg = document.querySelector('.avatar-portrait img');
+      if (staticImg) staticImg.style.opacity = '0';
+
+      const geometry = new THREE.PlaneGeometry(2.3, 2.3, 32, 32);
+      const material = new THREE.MeshStandardMaterial({
+        map: texture,
+        roughness: 0.25,
+        metalness: 0.1,
+        side: THREE.DoubleSide
+      });
+      portraitMesh = new THREE.Mesh(geometry, material);
+      scene.add(portraitMesh);
+    }, undefined, () => {
+      const geometry = new THREE.TorusKnotGeometry(1.1, 0.35, 128, 32);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x00d4ff,
+        wireframe: true,
+        roughness: 0.2,
+        metalness: 0.8
+      });
+      portraitMesh = new THREE.Mesh(geometry, material);
+      scene.add(portraitMesh);
+    });
+
+    renderer.domElement.addEventListener('mousedown', e => {
+      isDragging = true;
+      previousMousePosition = { x: e.clientX, y: e.clientY };
+    });
 
     window.addEventListener('mousemove', e => {
       mouseX = (e.clientX / window.innerWidth) - 0.5;
       mouseY = (e.clientY / window.innerHeight) - 0.5;
-    }, { passive: true });
+
+      if (isDragging) {
+        const deltaX = e.clientX - previousMousePosition.x;
+        const deltaY = e.clientY - previousMousePosition.y;
+        targetRotationY += deltaX * 0.008;
+        targetRotationX += deltaY * 0.008;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
 
     const clock = new THREE.Clock();
 
@@ -446,11 +485,20 @@
       requestAnimationFrame(animate);
       const time = clock.getElapsedTime();
 
-      torusKnot.rotation.x = time * 0.25 + mouseY * 0.8;
-      torusKnot.rotation.y = time * 0.3 + mouseX * 0.8;
+      if (portraitMesh) {
+        if (!isDragging) {
+          targetRotationY += (mouseX * 0.8 - targetRotationY) * 0.05;
+          targetRotationX += (mouseY * 0.8 - targetRotationX) * 0.05;
+          portraitMesh.rotation.y = time * 0.15 + targetRotationY;
+          portraitMesh.rotation.x = targetRotationX;
+        } else {
+          portraitMesh.rotation.y = targetRotationY;
+          portraitMesh.rotation.x = targetRotationX;
+        }
 
-      const scale = 1 + Math.sin(time * 1.5) * 0.05;
-      torusKnot.scale.set(scale, scale, scale);
+        const scale = 1 + Math.sin(time * 1.5) * 0.03;
+        portraitMesh.scale.set(scale, scale, scale);
+      }
 
       renderer.render(scene, camera);
     }

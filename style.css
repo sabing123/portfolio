@@ -1316,6 +1316,19 @@
       animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-delay: calc(var(--i, 0) * 70ms);
     }
+    
+    /* Journey 3D Scroll Animation */
+    #experience .timeline-item.visible {
+      animation: journey3d 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--i, 0) * 140ms);
+    }
+
+    /* Tech Stack Spring Bounce Animation */
+    #tech .tech-card.visible {
+      animation: techBounce 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+      animation-delay: calc(var(--i, 0) * 70ms);
+    }
+
     .fade-left.visible {
       animation: fadeLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
@@ -1326,6 +1339,33 @@
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(34px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes journey3d {
+      0% {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(25deg) translateY(60px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+      }
+    }
+    @keyframes techBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.8);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.04);
+      }
+      80% {
+        transform: translateY(4px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
     @keyframes fadeLeft {
       from { opacity: 0; transform: translateX(-40px); }
