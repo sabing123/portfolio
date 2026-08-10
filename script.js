@@ -553,11 +553,16 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text })
         });
-        const data = await res.json();
-        if (res.ok && data.reply) {
-          botDiv.textContent = data.reply;
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          if (res.ok && data.reply) {
+            botDiv.textContent = data.reply;
+          } else {
+            botDiv.textContent = data.error || 'Sorry, something went wrong.';
+          }
         } else {
-          botDiv.textContent = data.error || 'Sorry, something went wrong.';
+          botDiv.textContent = `Server Error (${res.status}): API endpoint not responding with JSON.`;
         }
       } catch (err) {
         console.log("eeeeeee", err)
