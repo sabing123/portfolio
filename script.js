@@ -507,6 +507,23 @@
   const chatInput = document.getElementById('chatInput');
   const chatMessages = document.getElementById('chatMessages');
 
+  function getFallbackBotReply(query) {
+    const q = query.toLowerCase();
+    if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('hire')) {
+      return "You can reach Sabin via email at sabingautam05@gmail.com or connect with him on GitHub/LinkedIn linked in the footer!";
+    }
+    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('python') || q.includes('django') || q.includes('fastapi')) {
+      return "Sabin is a Full-Stack Python Engineer & AI Agent Architect with 8+ years of experience. His core stack includes Python, Django, FastAPI, LangGraph, PostgreSQL, Docker, AWS, and Redis.";
+    }
+    if (q.includes('project') || q.includes('work') || q.includes('build')) {
+      return "Sabin builds scalable web applications, enterprise analytics platforms, microservices, multi-agent orchestration systems, and RAG knowledge assistants. Check out the Projects section above for details!";
+    }
+    if (q.includes('experience') || q.includes('year') || q.includes('background')) {
+      return "Sabin has 8+ years of professional experience building robust backend systems, high-performance web APIs, and advanced AI agent workflows.";
+    }
+    return `Thanks for your question! Sabin Gautam is a Full-Stack Python Engineer & AI Agent Architect with 8+ years of experience. You can reach him directly at sabingautam05@gmail.com.`;
+  }
+
   if (chatToggleBtn && chatWindow) {
     chatToggleBtn.addEventListener('click', () => {
       chatWindow.classList.toggle('hidden');
@@ -554,19 +571,20 @@
           body: JSON.stringify({ message: text })
         });
         const contentType = res.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
+        if (contentType && contentType.includes("application/json") && res.ok) {
           const data = await res.json();
-          if (res.ok && data.reply) {
+          if (data.reply) {
             botDiv.textContent = data.reply;
           } else {
-            botDiv.textContent = data.error || 'Sorry, something went wrong.';
+            botDiv.textContent = data.error || getFallbackBotReply(text);
           }
         } else {
-          botDiv.textContent = `Server Error (${res.status}): API endpoint not responding with JSON.`;
+          // Fallback for static hosting (404 Not Found on /api/chat)
+          botDiv.textContent = getFallbackBotReply(text);
         }
       } catch (err) {
-        console.log("eeeeeee", err)
-        botDiv.textContent = 'Network error. Please try again later.';
+        // Fallback on network error
+        botDiv.textContent = getFallbackBotReply(text);
       }
       chatMessages.scrollTop = chatMessages.scrollHeight;
     });
