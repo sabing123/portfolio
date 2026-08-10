@@ -498,4 +498,71 @@
   } else {
     window.addEventListener('load', initThreeJS);
   }
+
+  /* ================= AI Chatbot Widget ================= */
+  const chatToggleBtn = document.getElementById('chatToggleBtn');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+
+  if (chatToggleBtn && chatWindow) {
+    chatToggleBtn.addEventListener('click', () => {
+      chatWindow.classList.toggle('hidden');
+      if (!chatWindow.classList.contains('hidden')) {
+        chatInput.focus();
+      }
+    });
+
+    chatCloseBtn.addEventListener('click', () => {
+      chatWindow.classList.add('hidden');
+    });
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      // Append user message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'chat-msg user';
+      userDiv.textContent = text;
+      chatMessages.appendChild(userDiv);
+      chatInput.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Append typing indicator
+      const botDiv = document.createElement('div');
+      botDiv.className = 'chat-msg bot';
+      botDiv.textContent = 'Thinking...';
+      chatMessages.appendChild(botDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // If testing locally by opening file directly (file://), simulate response since serverless functions require HTTP server
+      if (window.location.protocol === 'file:') {
+        setTimeout(() => {
+          botDiv.textContent = `[Local Preview Mode]: You asked "${text}". Once deployed on Vercel with your GEMINI_API_KEY set, this will connect live to the Gemini AI API!`;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 800);
+        return;
+      }
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        if (res.ok && data.reply) {
+          botDiv.textContent = data.reply;
+        } else {
+          botDiv.textContent = data.error || 'Sorry, something went wrong.';
+        }
+      } catch (err) {
+        botDiv.textContent = 'Network error. Please try again later.';
+      }
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+  }
 })();
