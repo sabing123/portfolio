@@ -560,6 +560,7 @@
           botDiv.textContent = data.error || 'Sorry, something went wrong.';
         }
       } catch (err) {
+        console.log("eeeeeee", err)
         botDiv.textContent = 'Network error. Please try again later.';
       }
       chatMessages.scrollTop = chatMessages.scrollHeight;
