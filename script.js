@@ -565,7 +565,7 @@
         return;
       }
       try {
-        const res = await fetch('/api/chat', {
+        const res = await fetch('https://sabing123.pythonanywhere.com/chat"', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text })
