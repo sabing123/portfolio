@@ -705,6 +705,7 @@
     }
 
     .about-stats {
+      margin-top: -5rem;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
@@ -1064,6 +1065,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
+      align-items: start;
     }
 
     .contact-info h3 {
@@ -1129,6 +1131,7 @@
       border-radius: 16px;
       padding: 32px;
       backdrop-filter: blur(10px);
+      margin-top: 11rem;
     }
 
     .form-group {
@@ -1472,8 +1475,9 @@
       .hero { min-height: auto; padding: 140px 20px 80px; }
       .projects-grid { grid-template-columns: 1fr; }
       .tech-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-stats { grid-template-columns: repeat(2, 1fr); }
+      .about-stats { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
       .hero-visual { height: 520px; margin-top: 40px; }
+      .contact-form { margin-top: 0rem; }
 
       .timeline::before { left: 24px; }
       .timeline-item {
