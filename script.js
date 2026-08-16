@@ -406,20 +406,57 @@
     });
   }
 
-  /* ================= Theme Toggle ================= */
+  /* ================= Theme & Color Picker ================= */
   const themeToggle = document.getElementById('themeToggle');
   const htmlEl = document.documentElement;
+  const colorDotBtns = document.querySelectorAll('.color-dot-btn');
 
   const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedColorTheme = localStorage.getItem('colorTheme') || 'blue';
+
   if (savedTheme === 'light') {
     htmlEl.classList.add('light-mode');
+    if (savedColorTheme) {
+      htmlEl.classList.add('theme-' + savedColorTheme);
+    }
   }
+
+  function applyColorTheme(color) {
+    htmlEl.classList.remove('theme-blue', 'theme-green', 'theme-purple');
+    if (color && htmlEl.classList.contains('light-mode')) {
+      htmlEl.classList.add('theme-' + color);
+    }
+    colorDotBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.color === color && htmlEl.classList.contains('light-mode'));
+    });
+    localStorage.setItem('colorTheme', color);
+  }
+
+  if (savedTheme === 'light' && savedColorTheme) {
+    applyColorTheme(savedColorTheme);
+  }
+
+  colorDotBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!htmlEl.classList.contains('light-mode')) {
+        htmlEl.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+      }
+      applyColorTheme(btn.dataset.color);
+    });
+  });
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       htmlEl.classList.toggle('light-mode');
       const isLight = htmlEl.classList.contains('light-mode');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      if (isLight) {
+        applyColorTheme(localStorage.getItem('colorTheme') || 'blue');
+      } else {
+        htmlEl.classList.remove('theme-blue', 'theme-green', 'theme-purple');
+        colorDotBtns.forEach(btn => btn.classList.remove('active'));
+      }
     });
   }
 

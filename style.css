@@ -28,6 +28,51 @@
       --text-muted: #6b7280;
     }
 
+    /* Light mode color theme overrides */
+    html.light-mode.theme-blue {
+      --neon-cyan: #2563eb;
+      --neon-blue: #1d4ed8;
+      --neon-purple: #3b82f6;
+    }
+    html.light-mode.theme-green {
+      --neon-cyan: #10b981;
+      --neon-blue: #059669;
+      --neon-purple: #34d399;
+    }
+    html.light-mode.theme-purple {
+      --neon-cyan: #7c3aed;
+      --neon-blue: #6d28d9;
+      --neon-purple: #a855f7;
+    }
+
+    .color-picker {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+    }
+    .color-dot-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .color-dot-btn:hover {
+      transform: scale(1.15);
+    }
+    .color-dot-btn.blue { background: #2563eb; }
+    .color-dot-btn.green { background: #10b981; }
+    .color-dot-btn.purple { background: #7c3aed; }
+    .color-dot-btn.active {
+      border-color: var(--text-primary);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+
     html.light-mode .nav {
       background: rgba(255, 255, 255, 0.9);
       border-bottom-color: rgba(0, 0, 0, 0.06);
