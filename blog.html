@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog & AI News | Sabin Gautam</title>
+  <meta name="description" content="Latest insights on Python, Django, AI agent workflows, and technology updates.">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="canonical" href="https://sabingautam.name.np/blog.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .blog-hero {
+      padding: 140px 32px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .blog-hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 32px;
+    }
+    .blog-card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15);
+    }
+    .blog-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: rgba(0,212,255,0.05);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .blog-content {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .blog-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .blog-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.01);
+    }
+    .blog-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 212, 255, 0.08);
+      color: var(--neon-cyan);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    .blog-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+    .blog-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .blog-loading {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-secondary);
+    }
+    .pagination-wrapper {
+      max-width: 1200px;
+      margin: 40px auto 80px auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+    #paginationContainer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .page-btn:hover:not(.disabled) {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    }
+    .page-btn.active {
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    .page-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .page-ellipsis {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Scroll reveal animations for cards (down and up) */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(34px);
+    }
+    .fade-in.visible {
+      animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--i, 0) * 70ms);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(34px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div id="scrollProgress"></div>
+
+  <!-- Custom cursor followers -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Background layers -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+  <canvas id="particles"></canvas>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo"><a href="index.html" style="color: inherit; text-decoration: none;">Sabin&nbsp;Gautam</a></div>
+    <ul class="nav-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#tech">Tech Stack</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="color-picker" aria-label="Theme color selector">
+        <button class="color-dot-btn blue" data-color="blue" aria-label="Blue color" title="Blue"></button>
+        <button class="color-dot-btn green" data-color="green" aria-label="Green color" title="Green"></button>
+        <button class="color-dot-btn purple" data-color="purple" aria-label="Purple color" title="Purple"></button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html#hero" onclick="toggleMobileNav()">Home</a>
+    <a href="index.html#about" onclick="toggleMobileNav()">About</a>
+    <a href="index.html#experience" onclick="toggleMobileNav()">Experience</a>
+    <a href="index.html#tech" onclick="toggleMobileNav()">Tech Stack</a>
+    <a href="index.html#projects" onclick="toggleMobileNav()">Projects</a>
+    <a href="blog.html" onclick="toggleMobileNav()" class="active">Blog</a>
+    <a href="index.html#contact" onclick="toggleMobileNav()">Contact</a>
+  </div>
+
+  <!-- Blog Hero -->
+  <section class="blog-hero">
+    <div class="hero-badge"><span class="pulse-dot"></span>Tech &amp; AI Insights</div>
+    <h1>Latest <span class="grad-text">Tech Articles</span> &amp; AI News</h1>
+    <p class="section-subtitle" style="margin: 0 auto;">Curated updates on Python, Django, artificial intelligence, multi-agent systems, and software engineering best practices.</p>
+  </section>
+
+  <!-- Blog Grid -->
+  <main class="blog-grid" id="blogGrid">
+    <div class="blog-loading">Fetching latest AI &amp; Python news...</div>
+  </main>
+
+  <div class="pagination-wrapper">
+    <div id="paginationContainer"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#tech">Tech Stack</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://github.com/sabing123" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/pyrite-demonic" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.facebook.com/sabin.gautam.16" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/sabin__gautam/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/sabin__gautam" target="_blank" rel="noopener">Twitter</a>
+    </div>
+    <p>&copy; <span id="year"></span> Sabin Gautam &middot; Built with Python, Django &amp; AI. Designed for the future.</p>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // Footer year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Mobile nav
+      function toggleMobileNav() {
+        const nav = document.getElementById('mobileNav');
+        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      }
+      window.toggleMobileNav = toggleMobileNav;
+
+      // Theme & Color picker sync
+      const themeToggle = document.getElementById('themeToggle');
+      const htmlEl = document.documentElement;
+      const colorDotBtns = document.querySelectorAll('.color-dot-btn');
+
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedColorTheme = localStorage.getItem('colorTheme') || 'blue';
+
+      if (savedTheme === 'light') {
+        htmlEl.classList.add('light-mode');
+        if (savedColorTheme) htmlEl.classList.add('theme-' + savedColorTheme);
+      }
+
+      function applyColorTheme(color) {
+        htmlEl.classList.remove('theme-blue', 'theme-green', 'theme-purple');
+        if (color && htmlEl.classList.contains('light-mode')) {
+          htmlEl.classList.add('theme-' + color);
+        }
+        colorDotBtns.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.color === color && htmlEl.classList.contains('light-mode'));
+        });
+        localStorage.setItem('colorTheme', color);
+      }
+
+      if (savedTheme === 'light' && savedColorTheme) {
+        applyColorTheme(savedColorTheme);
+      }
+
+      colorDotBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!htmlEl.classList.contains('light-mode')) {
+            htmlEl.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+          }
+          applyColorTheme(btn.dataset.color);
+        });
+      });
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          htmlEl.classList.toggle('light-mode');
+          const isLight = htmlEl.classList.contains('light-mode');
+          localStorage.setItem('theme', isLight ? 'light' : 'dark');
+          if (isLight) {
+            applyColorTheme(localStorage.getItem('colorTheme') || 'blue');
+          } else {
+            htmlEl.classList.remove('theme-blue', 'theme-green', 'theme-purple');
+            colorDotBtns.forEach(btn => btn.classList.remove('active'));
+          }
+        });
+      }
+
+      // Scroll progress & Back to top
+      const progressBar = document.getElementById('scrollProgress');
+      const nav = document.getElementById('nav');
+      const backToTop = document.getElementById('backToTop');
+
+      window.addEventListener('scroll', () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+        if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 600);
+      }, { passive: true });
+
+      if (backToTop) {
+        backToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Custom cursor initialization
+      function initCursor() {
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        if (!dot || !ring || window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches) return;
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        window.addEventListener('mousemove', e => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        }, { passive: true });
+
+        window.addEventListener('mouseover', e => {
+          const target = e.target;
+          const overInput = target.closest('input, textarea, select');
+          const interactive = target.closest('a, button, .tilt, .contact-item, .holo-card');
+          ring.classList.toggle('cursor-hover', !!interactive);
+          ring.classList.toggle('cursor-hidden', !!overInput);
+          dot.classList.toggle('cursor-hidden', !!overInput);
+        });
+
+        (function follow() {
+          ringX += (mouseX - ringX) * 0.18;
+          ringY += (mouseY - ringY) * 0.18;
+          dot.style.transform = 'translate(' + mouseX + 'px,' + mouseY + 'px) translate(-50%,-50%)';
+          ring.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px) translate(-50%,-50%)';
+          window.requestAnimationFrame(follow);
+        })();
+      }
+      initCursor();
+
+      // Fallback articles
+      const fallbackArticles = [
+        {
+          title: "The Evolution of Python in 2026: Speed, JIT, and Modern Async",
+          published_at: "2026-03-25T10:00:00Z",
+          description: "Python continues its meteoric rise with major performance updates, enhanced JIT compilation capabilities, and robust asynchronous programming paradigms that make enterprise backend services faster and more efficient than ever before.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["python", "programming", "backend"]
+        },
+        {
+          title: "Multi-Agent AI Systems with LangGraph: Architecting Autonomous Workflows",
+          published_at: "2026-03-20T14:30:00Z",
+          description: "Explore how multi-agent orchestration frameworks like LangGraph empower developers to build robust, collaborative AI architectures where specialized agents research, reason, verify, and execute complex workflows autonomously.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["ai", "python", "machinelearning"]
+        },
+        {
+          title: "Scaling Django REST Framework for Millions of Daily Requests",
+          published_at: "2026-03-15T09:15:00Z",
+          description: "A deep dive into production-tested optimization techniques for Django and DRF. Learn how custom database indexing, query optimization, Redis caching layers, and asynchronous task queues with Celery ensure sub-second API response times.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["django", "python", "api"]
+        },
+        {
+          title: "Building Production-Ready RAG Knowledge Assistants with pgvector",
+          published_at: "2026-03-10T11:45:00Z",
+          description: "Combine the reliability of PostgreSQL with vector embeddings using pgvector. Build high-performance retrieval-augmented generation pipelines that accurately answer questions directly from your proprietary enterprise documents.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["ai", "postgresql", "database"]
+        },
+        {
+          title: "Docker and Container Security Best Practices for Python Microservices",
+          published_at: "2026-03-05T08:20:00Z",
+          description: "Secure your cloud deployments by implementing multi-stage Docker builds, minimal base images, non-root container users, and automated vulnerability scanning in your CI/CD pipelines before deploying to AWS ECS or Kubernetes.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["devops", "docker", "aws"]
+        },
+        {
+          title: "The Future of Full-Stack Engineering in the Age of Intelligent Agents",
+          published_at: "2026-02-28T16:00:00Z",
+          description: "How artificial intelligence is transforming software engineering from manual boilerplate coding to high-level architectural design, system orchestration, and building intelligent agents that collaborate seamlessly with human developers.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["ai", "tech", "career"]
+        },
+        {
+          title: "Advanced Redis Caching Patterns for High-Throughput Web Services",
+          published_at: "2026-02-20T11:00:00Z",
+          description: "Master cache-aside, write-through, and pub/sub patterns with Redis. Reduce database load and achieve blazing-fast response times for millions of concurrent users.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["redis", "backend", "performance"]
+        },
+        {
+          title: "Building Robust CI/CD Pipelines with GitHub Actions and Docker",
+          published_at: "2026-02-15T09:30:00Z",
+          description: "Automate testing, linting, image building, and deployment workflows using GitHub Actions. Ensure zero downtime deployments and maintain high code quality across all your microservices.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["cicd", "github", "devops"]
+        },
+        {
+          title: "Demystifying Asynchronous Python: asyncio, Starlette, and FastAPI",
+          published_at: "2026-02-10T14:00:00Z",
+          description: "An in-depth guide to writing non-blocking asynchronous Python code. Understand event loops, tasks, futures, and how modern ASGI frameworks handle high concurrency effortlessly.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["python", "fastapi", "async"]
+        },
+        {
+          title: "Database Indexing Strategies Every Python Developer Should Know",
+          published_at: "2026-02-01T10:15:00Z",
+          description: "Stop slow database queries in their tracks. Learn about B-Trees, GIN/GiST indexes for JSON and vector data, composite indexes, and how to analyze query execution plans in PostgreSQL.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["postgresql", "database", "sql"]
+        },
+        {
+          title: "Microservices Architecture: Circuit Breakers and API Gateways in Practice",
+          published_at: "2026-01-25T11:00:00Z",
+          description: "Learn how to orchestrate distributed microservices securely with robust rate limiting, JWT authentication, and resilient circuit breaker patterns in cloud environments.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["microservices", "api", "architecture"]
+        },
+        {
+          title: "Unlocking Retrieval-Augmented Generation (RAG) with Modern LLMs",
+          published_at: "2026-01-18T15:20:00Z",
+          description: "A comprehensive guide on chunking strategies, embedding models, vector databases, and evaluation metrics to eliminate hallucinations in production AI applications.",
+          url: "https://dev.to",
+          cover_image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&auto=format&fit=crop&q=60",
+          tag_list: ["ai", "rag", "llm"]
+        }
+      ];
+
+      let allArticles = [];
+      let currentPage = 1;
+      const itemsPerPage = 9;
+
+      async function loadBlogs() {
+        const grid = document.getElementById('blogGrid');
+        if (!grid) return;
+
+        try {
+          const res = await fetch('https://dev.to/api/articles?per_page=50');
+          if (!res.ok) throw new Error('API fetch failed');
+          const articles = await res.json();
+
+          let fetched = (articles && articles.length > 0) ? articles : fallbackArticles;
+          const combined = [...fetched, ...fallbackArticles];
+
+          allArticles = combined.map(art => ({
+            title: art.title,
+            published_at: art.published_at || new Date().toISOString(),
+            description: art.description || art.title,
+            url: art.url,
+            cover_image: art.cover_image || art.social_image || 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=60',
+            tag_list: art.tag_list || ['tech', 'python']
+          })).sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+          renderPage(1);
+        } catch (err) {
+          allArticles = fallbackArticles.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+          renderPage(1);
+        }
+      }
+
+      function renderPage(page) {
+        currentPage = page;
+        const grid = document.getElementById('blogGrid');
+        const paginationContainer = document.getElementById('paginationContainer');
+        if (!grid) return;
+
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageArticles = allArticles.slice(startIndex, endIndex);
+
+        if (pageArticles.length === 0) {
+          grid.innerHTML = '<div class="blog-loading">No blogs found.</div>';
+          if (paginationContainer) paginationContainer.innerHTML = '';
+          return;
+        }
+
+        grid.innerHTML = pageArticles.map((art, index) => {
+          const dateStr = new Date(art.published_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+          const tag = art.tag_list && art.tag_list.length > 0 ? art.tag_list[0] : 'tech';
+          const imgUrl = art.cover_image || 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=60';
+
+          return `
+            <article class="blog-card fade-in" style="--i:${index}">
+              <img src="${imgUrl}" alt="${art.title}" class="blog-img" loading="lazy">
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <span>${dateStr}</span>
+                  <span class="blog-tag">${tag}</span>
+                </div>
+                <h3 class="blog-title">${art.title}</h3>
+                <p class="blog-desc">${art.description}</p>
+              </div>
+              <div class="blog-footer">
+                <span style="font-size: 12px; color: var(--text-muted);">Sabin's Feed</span>
+                <a href="${art.url}" target="_blank" rel="noopener" class="blog-btn">View More &rarr;</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Re-observe cards for scroll reveal (down and up)
+        const revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            } else {
+              entry.target.classList.remove('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        grid.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+        renderPaginationControls();
+        window.scrollTo({ top: 220, behavior: 'smooth' });
+      }
+
+      function renderPaginationControls() {
+        const totalPages = Math.ceil(allArticles.length / itemsPerPage);
+        let paginationContainer = document.getElementById('paginationContainer');
+
+        if (!paginationContainer) return;
+
+        if (totalPages <= 1) {
+          paginationContainer.innerHTML = '';
+          return;
+        }
+
+        let html = `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})">&larr; Prev</button>`;
+
+        let pagesToShow = [];
+        if (totalPages <= 4) {
+          for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
+        } else {
+          let finalPages = [1];
+          if (totalPages >= 2) finalPages.push(2);
+
+          let middlePages = [];
+          for (let i = 3; i <= totalPages - 2; i++) {
+            if (i === currentPage || i === currentPage - 1 || i === currentPage + 1) {
+              middlePages.push(i);
+            }
+          }
+
+          if (currentPage > 4) {
+            finalPages.push('...');
+          }
+
+          middlePages.forEach(p => {
+            if (!finalPages.includes(p)) finalPages.push(p);
+          });
+
+          if (currentPage < totalPages - 3) {
+            finalPages.push('...');
+          }
+
+          if (totalPages - 1 > 2 && !finalPages.includes(totalPages - 1)) {
+            finalPages.push(totalPages - 1);
+          }
+          if (totalPages > 2 && !finalPages.includes(totalPages)) {
+            finalPages.push(totalPages);
+          }
+
+          pagesToShow = finalPages;
+        }
+
+        pagesToShow.forEach(item => {
+          if (item === '...') {
+            html += `<span class="page-ellipsis">...</span>`;
+          } else {
+            html += `<button class="page-btn ${item === currentPage ? 'active' : ''}" onclick="changePage(${item})">${item}</button>`;
+          }
+        });
+
+        html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})">Next &rarr;</button>`;
+
+        paginationContainer.innerHTML = html;
+      }
+
+      window.changePage = function(page) {
+        const totalPages = Math.ceil(allArticles.length / itemsPerPage);
+        if (page < 1 || page > totalPages) return;
+        renderPage(page);
+      };
+
+      loadBlogs();
+    })();
+  </script>
+</body>
+</html>
