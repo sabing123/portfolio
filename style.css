@@ -1702,3 +1702,6 @@
       .chat-window { width: 90vw; right: -10px; height: 400px; }
       .chat-widget { bottom: 20px; right: 20px; }
     }
+    .swal2-container {
+      z-index: 99999 !important;
+    }

@@ -64,6 +64,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
 
@@ -627,17 +628,22 @@
           <span class="pulse-dot"></span>
           <span>Sabin's AI Assistant</span>
         </div>
-        <button id="chatCloseBtn" class="chat-close-btn" aria-label="Close chat">&times;</button>
+        <div class="chat-actions" style="display: flex; align-items: center; gap: 8px;">
+          <button id="chatClearBtn" class="chat-clear-btn" aria-label="Clear chat" title="Clear chat" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; padding: 4px; border-radius: 4px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          </button>
+          <button id="chatCloseBtn" class="chat-close-btn" aria-label="Close chat">&times;</button>
+        </div>
       </div>
       <div id="chatMessages" class="chat-messages">
         <div class="chat-msg bot">
-          Hi! I'm Sabin's AI assistant powered by Gemini. Ask me anything about Sabin's experience, Python skills, or projects!
+          Hi! I'm Sabin's AI assistant. Ask me anything about Sabin's experience, Python skills, or projects!
         </div>
       </div>
       <form id="chatForm" class="chat-form">
         <input type="text" id="chatInput" placeholder="Ask about Sabin's skills, projects..." autocomplete="off" required>
         <button type="submit" aria-label="Send message">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
         </button>
       </form>
     </div>
@@ -653,6 +659,7 @@
     </style>
   </noscript>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="script.js"></script>
 </body>
 </html>

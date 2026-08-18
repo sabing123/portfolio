@@ -573,6 +573,36 @@
       chatWindow.classList.add('hidden');
     });
 
+    const chatClearBtn = document.getElementById('chatClearBtn');
+    if (chatClearBtn) {
+      chatClearBtn.addEventListener('click', () => {
+        Swal.fire({
+          title: 'Clear Chat History?',
+          text: 'Are you sure you want to clear all chat messages?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#00d4ff',
+          cancelButtonColor: '#ef4444',
+          confirmButtonText: 'Yes, clear it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            chatMessages.innerHTML = `
+              <div class="chat-msg bot">
+                Hi! I'm Sabin's AI assistant powered by Groq. Ask me anything about Sabin's experience, Python skills, or projects!
+              </div>
+            `;
+            Swal.fire({
+              title: 'Cleared!',
+              text: 'Chat history has been cleared.',
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            });
+          }
+        });
+      });
+    }
+
     chatForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = chatInput.value.trim();
@@ -581,6 +611,7 @@
       // Append user message
       const userDiv = document.createElement('div');
       userDiv.className = 'chat-msg user';
+      userDiv.style.color = '#fff';
       userDiv.textContent = text;
       chatMessages.appendChild(userDiv);
       chatInput.value = '';
@@ -593,16 +624,9 @@
       chatMessages.appendChild(botDiv);
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // If testing locally by opening file directly (file://), simulate response since serverless functions require HTTP server
-      if (window.location.protocol === 'file:') {
-        setTimeout(() => {
-          botDiv.textContent = `[Local Preview Mode]: You asked "${text}". Once deployed on Vercel with your GEMINI_API_KEY set, this will connect live to the Gemini AI API!`;
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 800);
-        return;
-      }
+      // Always attempt connection to n8n webhook
       try {
-        const res = await fetch('https://sabing123.pythonanywhere.com/chat"', {
+        const res = await fetch('http://localhost:5678/webhook/portfolio-chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text })
@@ -610,18 +634,18 @@
         const contentType = res.headers.get("content-type");
         if (contentType && contentType.includes("application/json") && res.ok) {
           const data = await res.json();
-          if (data.reply) {
+          if (data.message) {
+            botDiv.textContent = data.message;
+          } else if (data.reply) {
             botDiv.textContent = data.reply;
           } else {
             botDiv.textContent = data.error || getFallbackBotReply(text);
           }
         } else {
-          // Fallback for static hosting (404 Not Found on /api/chat)
-          botDiv.textContent = getFallbackBotReply(text);
+          botDiv.textContent = "⚠️ Server error or invalid response from n8n. Please check your workflow execution logs.";
         }
       } catch (err) {
-        // Fallback on network error
-        botDiv.textContent = getFallbackBotReply(text);
+        botDiv.textContent = "⚠️ Unable to connect to the chatbot server right now. Please try again later or reach Sabin directly at sabingautam05@gmail.com";
       }
       chatMessages.scrollTop = chatMessages.scrollHeight;
     });
