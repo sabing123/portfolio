@@ -550,7 +550,7 @@
       return "You can reach Sabin via email at sabingautam05@gmail.com or connect with him on GitHub/LinkedIn linked in the footer!";
     }
     if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('python') || q.includes('django') || q.includes('fastapi')) {
-      return "Sabin is a Full-Stack Python Engineer & AI Agent Architect with 8+ years of experience. His core stack includes Python, Django, FastAPI, LangGraph, PostgreSQL, Docker, AWS, and Redis.";
+      return "Sabin is a Full-Stack Python Developer with 3+ years of experience. His core stack includes Python, Django, FastAPI, LangGraph, PostgreSQL, Docker, AWS, and Redis.";
     }
     if (q.includes('project') || q.includes('work') || q.includes('build')) {
       return "Sabin builds scalable web applications, enterprise analytics platforms, microservices, multi-agent orchestration systems, and RAG knowledge assistants. Check out the Projects section above for details!";
@@ -558,7 +558,7 @@
     if (q.includes('experience') || q.includes('year') || q.includes('background')) {
       return "Sabin has 8+ years of professional experience building robust backend systems, high-performance web APIs, and advanced AI agent workflows.";
     }
-    return `Thanks for your question! Sabin Gautam is a Full-Stack Python Engineer & AI Agent Architect with 8+ years of experience. You can reach him directly at sabingautam05@gmail.com.`;
+    return `Thanks for your question! Sabin Gautam is a Full-Stack Python Developer with 3+ years of experience. You can reach him directly at sabingautam05@gmail.com.`;
   }
 
   if (chatToggleBtn && chatWindow) {
